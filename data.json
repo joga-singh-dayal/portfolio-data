@@ -46,14 +46,16 @@
           "id": "portfolioVue",
           "title": "Personal Portfolio — Vue 3",
           "description": "This portfolio — built with Vue 3, Vite, TypeScript and Tailwind CSS. A hands-on deep dive into the Vue ecosystem after transitioning from React, demonstrating component architecture, Composition API and client-side routing.",
-          "technologies": ["Vue 3", "TypeScript", "Vite", "Tailwind CSS", "@vueuse/motion", "Vue Router 4"],
+          "technologies": ["Vue 3", "TypeScript", "Vite", "Tailwind CSS", "@vueuse/motion", "Vue Router 4", "Docker", "GitHub Actions"]
           "whyTech": "Vue 3's Composition API and single-file components make it intuitive for building component-driven UIs. The project was a deliberate learning vehicle to master the Vue ecosystem coming from a React background.",
           "features": [
             "Composition API with script setup syntax throughout",
             "Vue Router 4 for client-side navigation",
             "Animated skill and project explorer",
             "Fully responsive layout with Tailwind CSS",
-            "Deployed on Vercel"
+            "Dockerized with multi-stage build for production",
+            "GitHub Actions CI/CD pipeline with automated testing",
+            "Deployed on Vercel via production workflow"
           ]
         }
       ]
