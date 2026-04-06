@@ -58,7 +58,7 @@
             "Deployed on Vercel via production workflow"
           ],
           "github": "https://github.com/joga-singh-dayal/portfolio-vuejs",
-          "demo": "https://joga-singh-dayal-portfolio-vuejs.vercel.app/",
+          "demo": "https://joga-singh-dayal-portfolio-vuejs.vercel.app/"
         }
       ]
     },
