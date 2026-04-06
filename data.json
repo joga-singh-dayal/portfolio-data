@@ -56,7 +56,9 @@
             "Dockerized with multi-stage build for production",
             "GitHub Actions CI/CD pipeline with automated testing",
             "Deployed on Vercel via production workflow"
-          ]
+          ],
+          "github": "https://github.com/joga-singh-dayal/portfolio-vuejs",
+          "demo": "https://joga-singh-dayal-portfolio-vuejs.vercel.app/",
         }
       ]
     },
