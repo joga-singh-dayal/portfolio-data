@@ -1,0 +1,89 @@
+name: Validate Portfolio Data
+
+on:
+  push:
+    paths:
+      - 'data.json'
+  pull_request:
+    paths:
+      - 'data.json'
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+
+      - name: Validate JSON syntax
+        run: |
+          echo "Checking JSON syntax..."
+          cat data.json | python3 -m json.tool > /dev/null
+          echo "✅ JSON syntax is valid"
+
+      - name: Validate JSON structure
+        run: |
+          node -e "
+          const fs = require('fs');
+          const data = JSON.parse(fs.readFileSync('data.json', 'utf8'));
+          const errors = [];
+
+          // Check top level keys
+          if (!data.skills) errors.push('Missing: skills array');
+          if (!data.about) errors.push('Missing: about object');
+
+          // Check skills
+          if (data.skills) {
+            if (!Array.isArray(data.skills)) {
+              errors.push('skills must be an array');
+            } else {
+              data.skills.forEach((skill, i) => {
+                if (!skill.id) errors.push('skills[' + i + ']: missing id');
+                if (!skill.name) errors.push('skills[' + i + ']: missing name');
+                if (!skill.icon) errors.push('skills[' + i + ']: missing icon');
+                if (!skill.description) errors.push('skills[' + i + ']: missing description');
+                if (!Array.isArray(skill.projects)) errors.push('skills[' + i + ']: projects must be an array');
+                
+                if (Array.isArray(skill.projects)) {
+                  skill.projects.forEach((project, j) => {
+                    if (!project.id) errors.push('skills[' + i + '].projects[' + j + ']: missing id');
+                    if (!project.title) errors.push('skills[' + i + '].projects[' + j + ']: missing title');
+                    if (!project.description) errors.push('skills[' + i + '].projects[' + j + ']: missing description');
+                    if (!Array.isArray(project.technologies)) errors.push('skills[' + i + '].projects[' + j + ']: technologies must be an array');
+                    if (!Array.isArray(project.features)) errors.push('skills[' + i + '].projects[' + j + ']: features must be an array');
+                  });
+                }
+              });
+            }
+          }
+
+          // Check about
+          if (data.about) {
+            if (!data.about.summary) errors.push('about: missing summary');
+            if (!Array.isArray(data.about.highlights)) errors.push('about: highlights must be an array');
+            if (!Array.isArray(data.about.experience)) errors.push('about: experience must be an array');
+            if (!data.about.contact) errors.push('about: missing contact');
+            if (data.about.contact) {
+              if (!data.about.contact.email) errors.push('about.contact: missing email');
+              if (!data.about.contact.github) errors.push('about.contact: missing github');
+              if (!data.about.contact.linkedin) errors.push('about.contact: missing linkedin');
+            }
+          }
+
+          if (errors.length > 0) {
+            console.error('❌ Validation failed:');
+            errors.forEach(e => console.error('  - ' + e));
+            process.exit(1);
+          }
+
+          console.log('✅ Structure validation passed');
+          console.log('  - Skills found: ' + data.skills.length);
+          console.log('  - Projects found: ' + data.skills.reduce((acc, s) => acc + s.projects.length, 0));
+          console.log('  - Experience entries: ' + data.about.experience.length);
+          "
