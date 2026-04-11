@@ -59,6 +59,33 @@
           ],
           "github": "https://github.com/joga-singh-dayal/portfolio-vuejs",
           "demo": "https://joga-singh-dayal-portfolio-vuejs.vercel.app/"
+        },
+        {
+          "id": "infralyse",
+          "title": "Infralyse — IT Cost Comparison Tool",
+          "description": "A B2B SaaS dashboard built for a job interview at a German IT services company. Helps SMEs compare their current IT infrastructure costs against a managed cloud model. Built end-to-end with Vue 3, Supabase and Apache ECharts — from database schema and RLS security policies to PDF export and role-based access control.",
+          "technologies": ["Vue 3", "TypeScript", "Vite", "Pinia", "Vue Router 4", "Supabase", "PostgreSQL", "ECharts", "jsPDF", "PrimeVue", "Docker", "GitHub Actions"],
+          "whyTech": "Supabase was chosen for its built-in Row Level Security, allowing database-level access control without writing a backend. ECharts was selected over Chart.js for its superior configurability and reactive option API that integrates naturally with Vue's computed refs. jsPDF replaced html2canvas for PDF generation because ECharts renders to canvas elements which screenshot-based libraries cannot capture reliably.",
+          "features": [
+            "Role-based access control — Admin and Viewer roles with separate dashboards",
+            "Supabase authentication with email confirmation and auth callback flow",
+            "Row Level Security policies — viewers read all entries, only owners can write",
+            "Full CRUD for IT cost entries with client-side validation",
+            "KPI cards showing total current cost, cloud cost, savings and savings percentage",
+            "Grouped bar chart comparing current vs cloud costs across five categories",
+            "Line chart with 3M, 6M and 1Y filter — filter updates KPIs and both charts simultaneously",
+            "Programmatic PDF export built with jsPDF — KPI cards, bar chart and summary table",
+            "Shimmer skeleton loading states while data fetches",
+            "Seed data button for instant demo population",
+            "One-click demo login for Admin and Viewer roles — no registration required",
+            "Impressum page with portfolio disclaimer and GDPR-aware data notice",
+            "Dockerized with multi-stage build — Node builder stage, nginx alpine production stage",
+            "GitHub Actions CI pipeline — lint, Vitest unit tests and Vite build on every push",
+            "GitHub Actions CD pipeline — Docker image pushed to GitHub Container Registry on main",
+            "Deployed on Vercel with SPA rewrite rules for Vue Router history mode"
+          ],
+          "github": "https://github.com/joga-singh-dayal/infralyse",
+          "demo": "https://infralyse.vercel.app"
         }
       ]
     },
